@@ -1,7 +1,14 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack5';
+import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import './index.css';
+
+import { pdfjs } from 'react-pdf';
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.mjs',
+    import.meta.url,
+).toString();
 
 /**
  * @author Riccardo Paltrinieri <riccardo@paltrinieri.it>
@@ -20,7 +27,6 @@ export const Resume = () => {
                 <Col style={{}}>
                     <Document
                         file="/pdf/cv_riccardo_paltrinieri.pdf"
-                        alt="CV Riccardo Paltrinieri"
                         error={getPdfError()}
                     >
                         <Page pageNumber={1}/>
